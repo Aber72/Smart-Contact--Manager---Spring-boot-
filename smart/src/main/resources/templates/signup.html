@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+     <section>
+        <div class="container">
+            <div class="row">
+                  <!-- it is known that bootstrap took 12 grid to cover up the entire screen .to place our signup page
+                  at the middle of the any screen we took 8 grid in the mid given as col-md-8 and left 2-2 grid in the 
+                  left and right whis written as offset-md-2. -->
+                <div class="col-md-8 offset-md-2"> 
+
+                    <div class="my-card mt-3">
+
+                      <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
+                        <p  th:text="${session.message.content}"></p>                       
+                        <th:block  th:text="${@sessionHelper.removeMessageFromSession()}"> </th:block>
+                      </div>  
+
+                      <!-- <div th:if="${message}" th:class="${message.type}" class="alert" role="alert">
+                        <p th:text="${message.content}"></p>
+                      </div> -->
+
+                        <div class="container text-center">
+                          <img style="width: 80px;" th:src="@{/img/registered.png}" alt="">
+                        </div>
+
+
+                        <h1 class="text-center">Signup here</h1>
+                        <form novalidate action="" th:action="@{/do_register}" method="post" th:object="${user}">
+                          <!-- over here the th:object will keep the object reference here -->
+
+
+
+                            <!-- name field -->
+
+                            <div class=" form-group mb-3">
+
+                                <label for="name_field" class="form-label">Your Name</label>
+
+                                <input 
+                                name="name"
+                                type="text" 
+                                class="form-control " 
+                                th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"
+                               
+                                id="name_field" 
+                                aria-describedby="emailHelp"
+                                placeholder="Enter here"
+                                th:value="${user.name}"
+                              
+                                required/>
+                                <!-- if anything available in that object it will show by th:value  and same for all the fields
+                                for more reference use the video of code with durgesh 8th contact managemnet video 6:23min -->
+                                <div class="invalid-feedback" th:each="e:${#fields.errors('name')}" th:text="${e}">
+                                  
+                                </div>
+                            </div>
+
+                           
+
+
+                           <!-- email field -->
+
+                           <div class=" form-group mb-3">
+
+                            <label for="email_field" class="form-label">Your Email</label>
+
+                            <input 
+                            name="email"
+                            type="email" 
+                            class="form-control" 
+                            th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
+                            id="email" 
+                            aria-describedby="emailHelp"
+                            placeholder="Enter email here"
+                            th:value="${user.email}"
+                            required/>
+
+                            <div class="invalid-feedback" th:each="e:${#fields.errors('email')}" th:text="${e}">
+                                  
+                            </div>
+
+                           
+                          </div>
+
+
+                           <!-- password field -->
+
+                           <div class=" form-group mb-3">
+
+                            <label for="password_field" class="form-label">Your Password</label>
+
+                            <input
+                            name="password"
+                            type="password" 
+                            class="form-control" 
+                            th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
+                            id="password_field" 
+                            aria-describedby="emailHelp"
+                            placeholder="Enter email here"
+                            required/>
+                            <div class="invalid-feedback" th:each="e:${#fields.errors('password')}" th:text="${e}">
+                                  
+                            </div>
+
+                           
+                          </div>
+                          <!-- user about field -->
+
+                          <div>
+                            <div class="form-group">
+                                <textarea name="about" placeholder="Enter something about yourself" rows="8" class="form-control" th:text="${user.about}"></textarea>
+                            </div>
+
+                          </div>
+
+                          <!-- terms and condition -->
+
+                          <div class="container text-center mt-2 mb-2">
+                            <input type="checkbox"
+                            name="agreement"
+                            class="form-check-input"
+                            id="agreement"
+                            />
+                            <label for="agreement">Accept Terms and condition</label>
+                          </div>
+
+                          <!-- Buttons -->
+                          <div class="container text-center mt-2 ">
+                            <button type="submit" class="btn bg-primary12 text-white"  >Submit</button>
+                            <button  type="reset" class="btn btn-warning text-white"  >Reset</button>
+                          </div>
+
+
+
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+     </section>
+</body>
+</html>
