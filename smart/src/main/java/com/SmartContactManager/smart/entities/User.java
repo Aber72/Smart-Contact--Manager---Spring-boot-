@@ -37,6 +37,7 @@ public class User {
     @NotBlank(message = "Fill the password field")
     private String password;
 
+    
     private String role;
 
     private boolean enabled;

@@ -1,5 +1,7 @@
 package com.SmartContactManager.smart.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +33,10 @@ public class Contact {
 
     @Column(length = 50000)// it will restrict the length letters to 50,000.         
     private String description;
+
+
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     //Default constructor

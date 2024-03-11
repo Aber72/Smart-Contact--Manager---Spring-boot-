@@ -10,6 +10,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.SmartContactManager.smart.entities.Contact;
+import com.SmartContactManager.smart.entities.User;
+
+import java.util.List;
+
 
 public interface ContactRepository extends JpaRepository <Contact ,Integer> {
 
@@ -18,5 +22,8 @@ public interface ContactRepository extends JpaRepository <Contact ,Integer> {
     //in page object 1st obj is currentPage-page
     //2nd is Contact per page
     public Page<Contact> findContactByUser(@Param("userId") int userId, Pageable pePageable);
+    
+    // for search 
+    public List<Contact>  findByNameContainingAndUser(String name, User user);
     
 }
