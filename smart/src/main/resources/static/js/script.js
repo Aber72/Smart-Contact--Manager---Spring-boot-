@@ -44,7 +44,7 @@ const search =() =>{
     console.log(query);
 
     //sending request to server
-    let url = `http://localhost:8080/search/${query}`;
+    let url = `https://smartcontact-production-7ba7.up.railway.app/search/${query}`;
     fetch(url).then((response)=>{
         return response.json();
     }).then ((data)=>{
